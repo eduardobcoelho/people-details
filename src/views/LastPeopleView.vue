@@ -33,7 +33,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .home {
+  .last-people-view {
     width: 100%;
     display: flex;
     gap: 20px;

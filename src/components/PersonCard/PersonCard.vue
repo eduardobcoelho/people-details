@@ -1,9 +1,6 @@
 <template>
-  <div class="person-card">
-    <div
-      class="person-card__image-profile"
-      :style="`background-image: url(${photo})`"
-    ></div>
+  <div class="person-card" @click="toPersonDetails">
+    <PersonAvatar :photo="photo"></PersonAvatar>
     <div class="person-card__name">
       <h2>{{ name }}</h2>
     </div>
@@ -16,13 +13,39 @@
 </template>
 
 <script>
+  import { useStore } from '@/store';
+  import PersonAvatar from '@/components/PersonAvatar/PersonAvatar.vue';
+
   export default {
     name: 'PersonCard',
+    components: {
+      PersonAvatar,
+    },
     props: {
       name: { String, require: true },
       photo: { String, require: true },
       age: { String, require: true },
       email: { String, require: true },
+    },
+    data: () => ({
+      store: useStore(),
+    }),
+    methods: {
+      async toPersonDetails() {
+        await this.pushPersonToLastPeopleViewed();
+        this.$router.push(`/person-details/${this.name}`);
+      },
+      async pushPersonToLastPeopleViewed() {
+        await this.store.$patch({
+          lastPeopleViewed: [
+            ...this.store.lastPeopleViewed,
+            await this.getPersonData(),
+          ],
+        });
+      },
+      async getPersonData() {
+        return await this.store.people.find(({ name }) => name === this.name);
+      },
     },
   };
 </script>
@@ -58,21 +81,12 @@
       box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
     }
 
-    &__image-profile {
-      height: 80px;
-      width: 80px;
-      border-radius: 50%;
-      border: 2px solid lightgray;
-      background-size: cover;
-      background-position: center;
-    }
-
     &__name {
       margin: 14px 0;
     }
 
     &__extra-info {
-      margin: 14px 0;
+      margin-top: 14px;
     }
   }
 </style>
