@@ -6,6 +6,7 @@
       :name="person.name"
       :photo="person.photo"
       :age="person.age"
+      :email="person.email"
     ></PersonCard>
   </div>
 </template>

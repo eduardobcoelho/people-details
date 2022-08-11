@@ -8,6 +8,10 @@
       <h2>{{ name }}</h2>
     </div>
     <hr />
+    <div class="person-card__extra-info">
+      <h3>{{ email }}</h3>
+      <h3>Idade: {{ age }}</h3>
+    </div>
   </div>
 </template>
 
@@ -18,12 +22,14 @@
       name: { String, require: true },
       photo: { String, require: true },
       age: { String, require: true },
+      email: { String, require: true },
     },
   };
 </script>
 
 <style lang="scss" scoped>
-  h2 {
+  h2,
+  h3 {
     margin: 0;
   }
 
@@ -62,6 +68,10 @@
     }
 
     &__name {
+      margin: 14px 0;
+    }
+
+    &__extra-info {
       margin: 14px 0;
     }
   }

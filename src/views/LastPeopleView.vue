@@ -6,6 +6,7 @@
       :name="person.name"
       :photo="person.photo"
       :age="person.age"
+      :email="person.email"
     ></PersonCard>
     <template v-if="!lastPeople.length">
       <h3>Nenhuma pessoa vista ultimamente!</h3>
