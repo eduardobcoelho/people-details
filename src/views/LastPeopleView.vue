@@ -33,6 +33,10 @@
 </script>
 
 <style lang="scss" scoped>
+  h3 {
+    margin: 0;
+  }
+
   .last-people-view {
     width: 100%;
     display: flex;

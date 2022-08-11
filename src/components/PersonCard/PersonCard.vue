@@ -32,8 +32,14 @@
     }),
     methods: {
       async toPersonDetails() {
-        await this.pushPersonToLastPeopleViewed();
+        if (!this.personAlreadyExistOnLastPeopleViewed())
+          await this.pushPersonToLastPeopleViewed();
         this.$router.push(`/person-details/${this.name}`);
+      },
+      personAlreadyExistOnLastPeopleViewed() {
+        return this.store.lastPeopleViewed.find(
+          ({ name }) => name === this.name,
+        );
       },
       async pushPersonToLastPeopleViewed() {
         await this.store.$patch({
@@ -43,8 +49,8 @@
           ],
         });
       },
-      async getPersonData() {
-        return await this.store.people.find(({ name }) => name === this.name);
+      getPersonData() {
+        return this.store.people.find(({ name }) => name === this.name);
       },
     },
   };

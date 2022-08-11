@@ -42,7 +42,6 @@
 
     &__views {
       width: 100%;
-      margin-top: 14px;
       display: flex;
       justify-content: center;
       align-items: center;
