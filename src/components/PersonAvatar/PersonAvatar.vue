@@ -7,14 +7,15 @@
 
 <script>
   export default {
+    name: 'PersonAvatar',
     props: {
       photo: {
         type: String,
-        require: true,
+        required: true,
       },
       size: {
         type: String,
-        require: false,
+        required: false,
         default: '80',
       },
     },

@@ -22,18 +22,18 @@
       PersonAvatar,
     },
     props: {
-      name: { String, require: true },
-      photo: { String, require: true },
-      age: { String, require: true },
-      email: { String, require: true },
+      name: { type: String, required: true },
+      photo: { type: String, required: true },
+      age: { type: String, required: true },
+      email: { type: String, required: true },
     },
     data: () => ({
       store: useStore(),
     }),
     methods: {
-      async toPersonDetails() {
+      toPersonDetails() {
         if (!this.personAlreadyExistOnLastPeopleViewed())
-          await this.pushPersonToLastPeopleViewed();
+          this.pushPersonToLastPeopleViewed();
         this.$router.push(`/person-details/${this.name}`);
       },
       personAlreadyExistOnLastPeopleViewed() {
@@ -41,11 +41,11 @@
           ({ name }) => name === this.name,
         );
       },
-      async pushPersonToLastPeopleViewed() {
-        await this.store.$patch({
+      pushPersonToLastPeopleViewed() {
+        this.store.$patch({
           lastPeopleViewed: [
             ...this.store.lastPeopleViewed,
-            await this.getPersonData(),
+            this.getPersonData(),
           ],
         });
       },
