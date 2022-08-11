@@ -1,6 +1,13 @@
 <template>
-  <nav><router-link to="/">Home</router-link></nav>
-  <router-view />
+  <div class="app-content">
+    <nav>
+      <router-link to="/">Pessoas</router-link> |
+      <router-link to="/last-people">Últimas pessoas vistas</router-link>
+    </nav>
+    <div class="app-content__views">
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <style lang="scss">
@@ -22,6 +29,23 @@
       &.router-link-exact-active {
         color: #42b983;
       }
+    }
+  }
+
+  .app-content {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    &__views {
+      width: 100%;
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 </style>

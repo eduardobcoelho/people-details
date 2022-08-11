@@ -1,9 +1,13 @@
-import { createStore } from 'vuex';
+import { defineStore } from 'pinia';
+import { createPinia } from 'pinia';
+import { people } from '@/mocks';
 
-export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
+export const useStore = defineStore('main', {
+  state: () => ({
+    people: [...people],
+    lastPeopleViewed: [],
+  }),
   actions: {},
-  modules: {},
 });
+
+export default createPinia();
