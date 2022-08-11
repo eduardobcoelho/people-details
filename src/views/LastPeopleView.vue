@@ -1,12 +1,15 @@
 <template>
-  <div class="home">
+  <div class="last-people-view">
     <PersonCard
-      v-for="person in people"
+      v-for="person in lastPeople"
       :key="person.name"
       :name="person.name"
       :photo="person.photo"
       :age="person.age"
     ></PersonCard>
+    <template v-if="!lastPeople.length">
+      <h3>Nenhuma pessoa vista ultimamente!</h3>
+    </template>
   </div>
 </template>
 
@@ -16,11 +19,13 @@
   import PersonCard from '@/components/PersonCard/PersonCard.vue';
 
   export default {
-    name: 'HomeView',
-    components: { PersonCard },
+    name: 'LastPeopleView',
+    components: {
+      PersonCard,
+    },
     computed: {
       ...mapState(useStore, {
-        people: 'people',
+        lastPeople: 'lastPeopleViewed',
       }),
     },
   };
@@ -31,7 +36,7 @@
     width: 100%;
     display: flex;
     gap: 20px;
-    flex-flow: row wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
